@@ -1,0 +1,45 @@
+{% extends "users.tpl" %}
+
+{% block main %}
+
+<h3>Add a Project</h3>
+<p>The project tag is an unique identifier for the project.</p>
+<form action="/admin/projects" method="post" class="projectform">
+<input type="hidden" name="action" value="add">
+<label>Project tag: <i>eg. newproject</i></label>
+<input type="text" name="project_tag">
+<label>Display name: <i>eg. New Project</i></label>
+<input type="text" name="display_name">
+<label>Gravatar email: <i>eg. newproject@cusf.co.uk</i></label>
+<input type="text" name="gravatar_email">
+<input type="submit" value="Add Project">
+</form>
+
+<h3>Manage existing Projects</h3>
+<p>Note that a project cannot be deleted unless there are no snippets associated with it. Consider hiding it from the sidebar instead.</p>
+
+{% for project in projects %}
+
+<h4 class="user">
+  <a href="/project/{{project.key.name}}">
+    <img src="{{project.gravatar_url}}&s=30">
+  </a>
+  {{project.display_name}}
+</h4>
+
+<form action="/admin/projects" method="post" class="updateproject projectform">
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="project_tag" value="{{project.key.name}}">
+<label>Project tag:</label>
+<input type="text" value="{{project.key.name}}" disabled>
+<label>Display name:</label>
+<input type="text" name="display_name" value="{{project.display_name}}">
+<label>Gravatar email:</label>
+<input type="text" name="gravatar_email" value="{{project.gravatar_email}}">
+<input type="submit" name="update" value="Update">
+<input type="submit" name="hide" value="{% if project.sidebar_hide %}Show{% else %}Hide{% endif %} project in sidebar">
+<input type="submit" name="delete" value="Attempt delete?">
+</form>
+{% endfor %}
+
+{% endblock %}

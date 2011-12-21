@@ -1,0 +1,284 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+@import url(http://fonts.googleapis.com/css?family=Sansita+One);
+
+* {
+  outline: 0;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #f2f2f2;
+  padding-top: 0;
+  font-family: 'Droid Sans', sans-serif;
+}
+
+body.compact {
+  max-width: 600px;
+  padding-top: 2em;
+}
+
+pre {
+  font-family: 'Droid Sans Mono';
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap !important;
+}
+
+.header {
+  background: #fff;
+  margin: 0 0 20px 0;
+  -moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  padding-left: 10px;
+  font-family: 'Sansita One', cursive;
+  text-shadow: 5px 5px 5px rgba(100, 100, 100, 0.4);
+  color: #222;
+}
+
+.admin {
+  float:right;
+  margin: 0;
+}
+
+.sidebar {
+  float: left;
+  width: 250px;
+}
+
+.clear {
+  clear: both;
+}
+
+.nosnippets {
+  color: red;
+  font-style: italic;
+}
+
+.main {
+  margin-left: 260px;
+  border-left: 1px solid #ccc;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.week h4 {
+  font-size: 16px;
+  color: #bbb;
+}
+
+.week h4 a.cal {
+  vertical-align: middle;
+  padding-right: 4px;
+  padding-top: 2px;
+}
+
+.week h4 img {
+  border: 0;
+}
+
+.week h4.snippet {
+  color: #000;
+}
+
+h4.user {
+  font-size: 16px;
+  margin-top: 2em;
+}
+
+h4.user img {
+  border: 0;
+  vertical-align: middle;
+}
+
+h4.user a {
+  margin-right: 10px;
+}
+
+.week h4 a.edit {
+  font-weight: normal;
+  margin-left: 1em;
+}
+
+h3.week {
+  text-align: center;
+  font-weight: normal;
+  font-size: 22px;
+}
+
+h3.week span.left {
+  float: left;
+}
+
+h3.week span.right {
+  float: right;
+}
+
+h3.week span {
+  font-size: 14px;
+  padding-top: 6px;
+}
+
+h3.week a {
+  text-decoration: none;
+}
+
+p.empty {
+  font-weight: normal;
+  text-align: center;
+  color: red;
+}
+
+pre.user {
+  padding-left: 1em;
+}
+
+.main textarea {
+  width: 100%;
+  height: 100px;
+  font-family: 'Droid Sans Mono';
+  font-size: 0.8em;
+  padding: 5px;
+}
+
+.week input[type=submit] {
+  display: block;
+}
+
+.wrapper {
+  clear: both;
+  background: #fff;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -moz-box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.users {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.users a {
+  text-decoration: none;
+  display: block;
+  color: #0000EE;
+}
+
+.users li {
+  padding: 5px;
+}
+
+.users li:not(.current):not(.spacer):hover {
+  background: #eee;
+}
+
+.users li.spacer {
+  padding: 1px 0 0 0;
+  background: #ccc;
+  margin: 5px 0;
+}
+
+.users img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.current {
+  background: #ccc;
+}
+
+.profile {
+  min-height: 120px;
+  margin-bottom: 30px;
+}
+
+.profile img {
+  float: left;
+  margin-right: 20px;
+  -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+
+.profile form {
+  display: inline;
+}
+
+.email {
+  background: url(/images/email.png) no-repeat;
+  padding-left: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.register form {
+  text-align: center;
+}
+
+.register label {
+  margin-right: 10px;
+}
+
+.register input[type="text"] {
+  width: 300px;
+}
+
+.register input[type="submit"] {
+  display: block;
+  padding: 5px 16px;
+  margin: 20px auto 5px auto;
+}
+
+.register table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+.projectform label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.projectform input[type="text"] {
+  display: block;
+}
+
+.projectform input[type="submit"] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.updateproject {
+  margin-left: 20px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

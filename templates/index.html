@@ -1,0 +1,62 @@
+{% extends "users.tpl" %}
+
+{% block main %}
+
+<div class="profile">
+<img src="{{who.gravatar_url}}&s=120">
+<h2>{{who.display_name}}</h2>
+{% if not editable %}
+<p><a href="mailto:{{who.user_object.email}}" class="email">Send an email</a></p>
+{% else %}
+You are {% if not who.email_alerts %}not {% endif %}currently signed up for email notifications.
+<form action="/alerts" method="post">
+<input type="hidden" name="alerts" value="{% if who.email_alerts %}0{% else %}1{% endif %}">
+<input type="submit" value="Opt {% if who.email_alerts %}out{% else %}in{% endif %}">
+</form>
+{% endif %}
+{% if empty %}
+<p class="nosnippets">
+{% if editable %}
+You haven't submitted any weekly snippets yet!
+{% else %}
+No weekly snippets submitted yet!
+{% endif %}
+</p>
+{% endif %}
+</div>
+{% for week in weeks %}
+<div class="week">
+<h4{% if week.snippet %} class="snippet"{% endif %}>
+<a href="/team/{{week.date|date:"U"}}" class="cal"><img src="/images/calendar{% if not week.snippet %}_fade{% endif %}.png"></a>
+{% if week.date|date:"F" == week.end_date|date:"F" %}
+{{week.date|date:"l jS"}} to {{week.end_date|date:"l jS M Y"}}
+{% else %}
+{% if week.date|date:"Y" == week.end_date|date:"Y" %}
+{{week.date|date:"l jS M"}} to {{week.end_date|date:"l jS M Y"}}
+{% else %}
+{{week.date|date:"l jS M Y"}} to {{week.end_date|date:"l jS M Y"}}
+{% endif %}
+{% endif %}
+{% if editable %}{% if week.snippet %}
+<a href="#" class="edit">Edit</a>
+{% else %}
+<a href="#" class="edit">Add</a>
+{% endif %}
+{% endif %}
+</h4>
+{% if editable %}
+<form action="/save" method="post" class="snippet hidden">
+  <input type="hidden" name="date" value="{{week.date|date:"U"}}">
+  <textarea name="content"></textarea>
+  <input type="submit" value="Save">
+</form>
+{% endif %}
+{% if week.snippet %}
+  <pre class="snippet">{{week.content}}</pre>
+{% endif %}
+</div>
+
+
+{% endfor %}
+
+{% endblock %}

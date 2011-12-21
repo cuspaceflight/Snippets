@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}CUSF Snippets{% endblock %}</title>
+  <link rel="stylesheet" href="/css/default.css">
+
+</head>
+
+<body class="compact">
+
+<div class="wrapper register">
+
+<p class="admin"><a href="{{logout}}">Logout</a></p>
+
+<h2>Register to use CUSF Snippets</h2>
+
+{% if approved %}
+
+<p><strong>{{approved.display_name}}</strong> ({{approved.user_object.email}}) has been {% if denied %}denied{% else %}approved{% endif %} to use CUSF Snippets.</p>
+
+{% else %}
+{% if registered %}
+
+<p>Your registration request has been submitted. You will receive an email when your account is approved!</p>
+
+{% else %}
+
+<p>Before you can use the CUSF Snippets tool, you will need to have your account approved by an administrator (just to check that you are a member of the team).</p>
+<p>Filling in your CRSid in the form below will help to speed up this process. Please also enter your <strong>full name</strong>.</p>
+
+<p>You are currently logged in as: <strong>{{user.email}}</strong></p>
+
+<form action="/register" method="post">
+<table>
+<tr><td><label>Name:</label></td><td><input type="text" name="name"></td></tr>
+<tr><td><label>CRSid:</label></td><td><input type="text" name="crsid" style="width:100px;"></td></tr>
+</table>
+<input type="submit" value="Register">
+</form>
+
+{% endif %}
+{% endif %}
+
+</div>
+
+</body>
+
+</html>

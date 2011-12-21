@@ -1,0 +1,36 @@
+{% extends "users.tpl" %}
+
+{% block main %}
+
+<h3 class="week">
+<span class="left"><a href="{{prev|date:"U"}}">&laquo; Prev</a></span>
+{% if date|date:"F" == end_date|date:"F" %}
+{{date|date:"l jS"}} to {{end_date|date:"l jS M Y"}}
+{% else %}
+{% if date|date:"Y" == end_date|date:"Y" %}
+{{date|date:"l jS M"}} to {{end_date|date:"l jS M Y"}}
+{% else %}
+{{date|date:"l jS M Y"}} to {{end_date|date:"l jS M Y"}}
+{% endif %}
+{% endif %}
+<span class="right"><a href="{{next|date:"U"}}">Next &raquo;</a></span>
+</h3>
+
+{% for snippet in snippets %}
+
+<h4 class="user">
+{% if snippet.project %}
+<a href="/project/{{snippet.entity.key.name}}">
+{% else %}
+<a href="/user/{{snippet.entity.user_object.user_id}}">
+{% endif %}
+<img src="{{snippet.entity.gravatar_url}}&s=30"></a>{{snippet.entity.display_name}}</h4>
+<pre class="user">{{snippet.content}}</pre>
+
+{% empty %}
+
+<p class="empty">Sorry - there are no snippets for the selected week!</p>
+
+{% endfor %}
+
+{% endblock %}
