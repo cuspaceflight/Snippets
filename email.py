@@ -85,9 +85,18 @@ class Report(webapp.RequestHandler):
           subject, message)
 
 
+class Test(webapp.RequestHandler):
+  def get(self):
+    mail.send_mail('snippets@cusf.co.uk', 'admin@cusf.co.uk',
+        'Test email from App Engine', 'This is a test email; please delete!')
+    mail.send_mail('snippets@cusf.co.uk', 'ejc74@cam.ac.uk',
+        'Test email from App Engine', 'This is a test email; please delete!')
+
+
 application = webapp.WSGIApplication([
   ('/email/reminder', Reminder),
-  ('/email/report', Report)
+  ('/email/report', Report),
+  ('/email/test', Test)
 ], debug=True)
 
 

@@ -21,7 +21,7 @@ from models import *
 
 class Register(webapp.RequestHandler):
   def get(self):
-    
+
     user = None
     if self.request.get('key'):
       user = db.get(self.request.get('key'))
@@ -36,6 +36,7 @@ class Register(webapp.RequestHandler):
           user.approved = True
           user.put()
           memcache.delete('users')
+          memcache.set('user-%s' % user.user_object.user_id(), user)
           message = ('Your request to use CUSF Snippets has been approved. '
               'Visit http://snippets.cusf.co.uk/ to begin!')
           mail.send_mail('snippets@cusf.co.uk', user.user_object.email(),
@@ -52,7 +53,7 @@ class Register(webapp.RequestHandler):
     self.response.out.write(template.render(path, template_values))
 
   def post(self):
-    
+
     user_object = users.get_current_user()
     if user_object:
       user = User(parent=User.datastore_key(), key_name=user_object.user_id())
@@ -80,7 +81,7 @@ To deny this request, visit: %s
       
       mail.send_mail('snippets@cusf.co.uk', 'admin@cusf.co.uk',
           'CUSF Snippets user approval', message)
-
+      
       template_values = {
           'registered': True,
           'logout': users.create_logout_url('/')

@@ -20,7 +20,7 @@ from models import *
 
 class UserView(webapp.RequestHandler):
   def get(self, user_id=None):
-    
+
     user = User.get_current()
     if user == None:
       self.redirect('/register')
