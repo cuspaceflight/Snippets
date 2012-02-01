@@ -1,9 +1,9 @@
 View report online: http://snippets.cusf.co.uk/team/{{date|date:"U"}}
 
-{% for snippet in snippets %}{% if snippet.user %}
-{{snippet.user.display_name}}
+{% for snippet in snippets %}
+{{snippet.entity.display_name|safe}}
 ----------------------------------------
 
-{{snippet.content}}
+{{snippet.content|safe}}
 
-{% endif %}{% endfor %}
+{% endfor %}

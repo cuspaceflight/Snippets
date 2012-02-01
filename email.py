@@ -27,11 +27,10 @@ class Reminder(webapp.RequestHandler):
     end_date = date + datetime.timedelta(days=6)
 
     users = User.get_all()
-    snippets = Snippet.all()
-    snippets.ancestor(Snippet.datastore_key())
-    snippets.filter("date =", date)
+    snippets = Snippet.get_week_snippets(date)
     
-    authors = [snippet.user_id for snippet in snippets]
+    authors = [snippet.user_id for snippet in snippets
+        if not snippet.project_tag]
 
     remind_users = []
     for user in users:
@@ -60,13 +59,21 @@ class Report(webapp.RequestHandler):
     date = date - datetime.timedelta(days=date.weekday(), weeks=1)
     end_date = date + datetime.timedelta(days=6)    
 
-    user_data = dict((user.user_object.user_id(), user)
-        for user in User.get_all())
-   
-    snippets = [{
-            'user': user_data.get(snippet.user_id),
-            'content': snippet.content
-        } for snippet in Snippet.get_week_snippets(date)]
+    users_query = User.get_all()
+    projects_query = Project.get_all()
+
+    user_data = dict((user.user_object.user_id(), user) for user in users_query)   
+    project_data = dict((proj.key().name(), proj) for proj in projects_query)
+
+    snippets = []
+    for snippet in Snippet.get_week_snippets(date):      
+      data = {'content': snippet.content}
+      if snippet.project_tag and snippet.project_tag in project_data:
+        data['entity'] = project_data.get(snippet.project_tag)
+        snippets.append(data) 
+      elif not snippet.project_tag and snippet.user_id in user_data:
+        data['entity'] = user_data.get(snippet.user_id)
+        snippets.append(data)
 
     if len(snippets) > 0:
 
