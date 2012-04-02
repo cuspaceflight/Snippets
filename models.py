@@ -131,7 +131,7 @@ class User(Entity):
 class Snippet(db.Model):
   user_id = db.StringProperty()
   project_tag = db.StringProperty()
-  content = db.StringProperty(multiline=True)
+  content = db.TextProperty()
   date = db.DateProperty()
 
   @staticmethod
